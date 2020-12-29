@@ -1,80 +1,106 @@
 --CREATE DATABASE sonsofanarchy;
 
-\connect sonsofanarchy;
+--\connect sonsofanarchy;
 
--- Creació de les taules
-CREATE TABLE "Characters" (
-    "Character_ID"   VARCHAR (5)  NOT NULL,
-    "First_Name"     VARCHAR (20) NOT NULL,
-    "Last_Name"      VARCHAR (20) NOT NULL,
-    "Nickname"       VARCHAR (20) NOT NULL,
-    "Sex"            CHAR    (1)  NOT NULL,
-    "Birthday"       DATE         NOT NULL,
-    "Date_Joined"    DATE,
-    "Bike_ID"        VARCHAR (5)  NOT NULL,
-    "Headquarter_ID" VARCHAR (5)  NOT NULL
+-- TAULES
+CREATE TABLE Characters (
+    CharacterID VARCHAR (5)  NOT NULL,
+    FirstName   VARCHAR (20) NOT NULL,
+    LastName    VARCHAR (20) NOT NULL,
+    Nickname    VARCHAR (20) NOT NULL,
+    Sex         CHAR    (1)  NOT NULL,
+    Birthday    DATE         NOT NULL,
+    Age         NUMERIC      NOT NULL,
+    ResidenceID VARCHAR (5)  NOT NULL
+);
+
+CREATE TABLE Bikes (
+    BikeID       VARCHAR (5)  NOT NULL,
+    LicensePlate VARCHAR (7)  NOT NULL,
+    Brand        VARCHAR (20) NOT NULL,
+    Model        VARCHAR (20) NOT NULL,
+    Motor        VARCHAR (20) NOT NULL
     -- TODO: Acabar
 );
 
-CREATE TABLE "Bikes" (
-    "Bike_ID"       VARCHAR (5)  NOT NULL,
-    "License_Plate" VARCHAR (7)  NOT NULL,
-    "Brand"         VARCHAR (20) NOT NULL,
-    "Model"         VARCHAR (20) NOT NULL,
-    "Motor"         VARCHAR (20) NOT NULL
+CREATE TABLE Headquarters (
+    HeadquarterID VARCHAR (5)  NOT NULL,
+    Street        VARCHAR (25) NOT NULL,
+    City          VARCHAR (20) NOT NULL,
+    Postcode      VARCHAR (10) NOT NULL,
+    Country       VARCHAR (20) NOT NULL,
+    LiderID       VARCHAR (5)  NOT NULL
+);
+
+CREATE TABLE Business (
+    BusinessID   VARCHAR (5)  NOT NULL,
+    BusinessType VARCHAR (20) NOT NULL,
+    Date         DATE         NOT NULL,
+    Deposit      NUMERIC      NOT NULL,
+    Client       VARCHAR (20) NOT NULL
     -- TODO: Acabar
 );
 
-CREATE TABLE "Headquarters" (
-    "Headquarter_ID" VARCHAR (5)  NOT NULL,
-    "Street"         VARCHAR (25) NOT NULL,
-    "City"           VARCHAR (20) NOT NULL,
-    "Postcode"       VARCHAR (10) NOT NULL,
-    "Country"        VARCHAR (20) NOT NULL,
-    "Lider_ID"       VARCHAR (5)  NOT NULL
+CREATE TABLE CriminalRecord (
+    CrimeID     VARCHAR (5)  NOT NULL,
+    Crime       VARCHAR (20) NOT NULL,
+    Sentence    VARCHAR (20) NOT NULL,
+    JuryDate    DATE         NOT NULL
+    -- TODO: Acabar i renovar
 );
 
-CREATE TABLE "Business" (
-    "Business_ID"   VARCHAR (5)  NOT NULL,
-    "Business_Type" VARCHAR (20) NOT NULL,
-    "Date"          DATE         NOT NULL,
-    "Deposit"       NUMERIC      NOT NULL,
-    "Client"        VARCHAR (20) NOT NULL
+CREATE TABLE Payroll (
+    PayrollID    VARCHAR (5)  NOT NULL,
+    Payroll      NUMERIC      NOT NULL,
+    ExtraPayroll NUMERIC,
+    CharacterID  VARCHAR (5)  NOT NULL,
+    PayDate      DATE         NOT NULL
+);
+
+CREATE TABLE Bands (
+    BandID   VARCHAR (5)  NOT NULL,
+    BandName VARCHAR (20) NOT NULL
     -- TODO: Acabar
 );
 
-CREATE TABLE "Criminal_Record" (
-    "Crime_ID"     VARCHAR (5)  NOT NULL,
-    "Crime"        VARCHAR (20) NOT NULL,
-    "Jail"         BOOLEAN      NOT NULL,
-    "Jail_Street"  VARCHAR (20),
-    "Jail_City"    VARCHAR (20),
-    "Jail_Country" VARCHAR (20),
-    "Sentence"     VARCHAR (20) NOT NULL,
-    "Jury_Date"    DATE         NOT NULL
+CREATE TABLE Guns (
+    GunID   VARCHAR (5)  NOT NULL,
+    Brand   VARCHAR (20) NOT NULL,
+    Model   VARCHAR (20) NOT NULL,
+    GunType VARCHAR (1)  NOT NULL
     -- TODO: Acabar
 );
 
-CREATE TABLE "Payroll" (
-    "Payroll_ID"    VARCHAR (5)  NOT NULL,
-    "Payroll"       NUMERIC      NOT NULL,
-    "Extra_Payroll" NUMERIC,
-    "Character_ID"  VARCHAR (5)  NOT NULL,
-    "Pay_Date"      DATE         NOT NULL,
+CREATE TABLE Address (
+    AddressID  INT          NOT NULL,
+    Building   VARCHAR (20) NOT NULL,
+    Street     VARCHAR (20) NOT NULL,
+    Number     INT          NOT NULL,
+    City       VARCHAR (20) NOT NULL,
+    PostalCode VARCHAR (10) NOT NULL,
+    Country    VARCHAR (20) NOT NULL
 );
 
-CREATE TABLE "Bands" (
-    "Brand_ID"   VARCHAR (5)  NOT NULL,
-    "Brand_Name" VARCHAR (20) NOT NULL,
-    -- TODO: Acabar
-);
+-- CLAUS PRIMARIES
 
-CREATE TABLE "Guns" (
-    "Gun_ID"   VARCHAR (5)  NOT NULL,
-    "Brand"    VARCHAR (20) NOT NULL,
-    "Model"    VARCHAR (20) NOT NULL,
-    "Gun_Type" VARCHAR (1)  NOT NULL,
-    -- TODO: Acabar
-);
+ALTER TABLE Characters     ADD CONSTRAINT CharactersPK     PRIMARY KEY (CharacterID);
 
--- Assignació de claus primàries i foranes
+ALTER TABLE Bikes          ADD CONSTRAINT BikesPK          PRIMARY KEY (BikeID);
+
+ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersPK   PRIMARY KEY (HeadquarterID);
+
+ALTER TABLE Business       ADD CONSTRAINT BusinessPK       PRIMARY KEY (BusinessID);
+
+ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordPK PRIMARY KEY (CrimeID);
+
+ALTER TABLE Payroll        ADD CONSTRAINT PayrollPK        PRIMARY KEY (PayrollID);
+
+ALTER TABLE Bands          ADD CONSTRAINT BandsPK          PRIMARY KEY (BandID);
+
+ALTER TABLE Guns           ADD CONSTRAINT GunsPK           PRIMARY KEY (GunID);
+
+ALTER TABLE Address        ADD CONSTRAINT AddressPK        PRIMARY KEY (AddressID);
+
+-- CLAUS FORANES
+
+    --TODO: Fer les claus foranes
