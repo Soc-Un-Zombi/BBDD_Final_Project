@@ -11,9 +11,15 @@ CREATE TABLE Members (
     Birthday      DATE         NOT NULL,
     Age           INT          NOT NULL,
     Work          VARCHAR (20) NOT NULL,
+    AddressID     INT          NOT NULL,
     InBand        BOOLEAN      NOT NULL,
-    HouseID       VARCHAR (5)  NOT NULL,
     HeadquarterID INT
+);
+
+-- Patches:
+CREATE TABLE Patches (
+    Patch    VARCHAR (20) NOT NULL,
+    MemberID INT          NOT NULL
 );
 
 -- Bikes: Table with the bikes of the members (Finished)
@@ -25,11 +31,12 @@ CREATE TABLE Bikes (
     MemberID     INT          NOT NULL
 );
 
--- Headquarters: Table of the Headquarters of Sons of Anarchy TODO
+-- Headquarters: Table of the Headquarters of Sons of Anarchy (Finished)
 CREATE TABLE Headquarters (
     HeadquarterID INT  GENERATED ALWAYS AS IDENTITY,
     Foundation    DATE NOT NULL,
-    AdressID      INT  NOT NULL
+    PresidentID   INT  NOT NULL,
+    AddressID     INT  NOT NULL
 );
 
 -- Business: Table where you can see and save the business of SoA (Finished)
@@ -42,7 +49,7 @@ CREATE TABLE Business (
     Client        VARCHAR (20) NOT NULL
 );
 
--- Workers: Multivalued atribute from business (Finishedw)
+-- Workers: Multivalued atribute from business (Finished)
 CREATE TABLE Workers (
     BusinessID VARCHAR (5) NOT NULL,
     EmployerID VARCHAR (5) NOT NULL
@@ -51,7 +58,7 @@ CREATE TABLE Workers (
 -- CriminalRecord: (Finished)
 CREATE TABLE CriminalRecord (
     CrimeID   INT GENERATED ALWAYS AS IDENTITY,
-    MemberID  INT NOT NULL,
+    MemberID  INT          NOT NULL,
     Crime     VARCHAR (20) NOT NULL,
     JuryDate  DATE         NOT NULL,
     JailIn    DATE         NOT NULL,
@@ -81,13 +88,40 @@ CREATE TABLE Address (
 -- PRIMARY KEYS
 
 ALTER TABLE Members        ADD CONSTRAINT MembersPK        PRIMARY KEY (MemberID);
+
+ALTER TABLE Patches        ADD CONSTRAINT PatchesPK        PRIMARY KEY (Patch, MemberID);
+
 ALTER TABLE Bikes          ADD CONSTRAINT BikesPK          PRIMARY KEY (LicensePlate);
+
 ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersPK   PRIMARY KEY (HeadquarterID);
+
 ALTER TABLE Business       ADD CONSTRAINT BusinessPK       PRIMARY KEY (BusinessID);
+
+ALTER TABLE Workers        ADD CONSTRAINT WorkersPK        PRIMARY KEY (BusinessID, EmployerID);
+
 ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordPK PRIMARY KEY (CrimeID);
+
 ALTER TABLE Guns           ADD CONSTRAINT GunsPK           PRIMARY KEY (GunID);
+
 ALTER TABLE Address        ADD CONSTRAINT AddressPK        PRIMARY KEY (AddressID);
 
 -- FOREING KEYS
 
-    --TODO: Fer les claus foranes
+ALTER TABLE Members        ADD CONSTRAINT MembersFK01        FOREIGN KEY (AddressID)     REFERENCES Address      (AddressID),
+                           ADD CONSTRAINT MembersFK02        FOREIGN KEY (HeadquarterID) REFERENCES Headquarters (HeadquarterID);
+
+ALTER TABLE Patches        ADD CONSTRAINT PatchesFK01        FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
+
+ALTER TABLE Bikes          ADD CONSTRAINT BikesFK01          FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
+
+ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersFK01   FOREIGN KEY (AddressID)     REFERENCES Address      (AddressID),
+                           ADD CONSTRAINT HeadquartersFK02   FOREIGN KEY (PresidentID)   REFERENCES Members      (MemberID);
+
+ALTER TABLE Business       ADD CONSTRAINT BusinessFK01       FOREIGN KEY (HeadquarterID) REFERENCES Headquarters (HeadquarterID);
+
+ALTER TABLE Workers        ADD CONSTRAINT WorkersFK01        FOREIGN KEY (BusinessID)    REFERENCES Business     (BusinessID),
+                           ADD CONSTRAINT WorkersFK02        FOREIGN KEY (EmployerID)    REFERENCES Members      (MemberID);
+
+ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordFK01 FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
+
+ALTER TABLE Guns           ADD CONSTRAINT GunsFK01           FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
