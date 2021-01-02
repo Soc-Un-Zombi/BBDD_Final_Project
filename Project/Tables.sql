@@ -1,7 +1,7 @@
 
 -- TABLES
 
--- Members: Table with members and his information (Finished)
+-- Members: (Finished)
 CREATE TABLE Members (
     MemberID      INT GENERATED ALWAYS AS IDENTITY,
     FirstName     VARCHAR (20) NOT NULL,
@@ -16,13 +16,13 @@ CREATE TABLE Members (
     HeadquarterID INT
 );
 
--- Patches:
+-- Patches: Multivalued atribute from Members (Finished)
 CREATE TABLE Patches (
     Patch    VARCHAR (20) NOT NULL,
     MemberID INT          NOT NULL
 );
 
--- Bikes: Table with the bikes of the members (Finished)
+-- Bikes: (Finished)
 CREATE TABLE Bikes (
     LicensePlate VARCHAR (10) NOT NULL,
     Brand        VARCHAR (20) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE Bikes (
     MemberID     INT          NOT NULL
 );
 
--- Headquarters: Table of the Headquarters of Sons of Anarchy (Finished)
+-- Headquarters: (Finished)
 CREATE TABLE Headquarters (
     HeadquarterID INT  GENERATED ALWAYS AS IDENTITY,
     Foundation    DATE NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE Headquarters (
     AddressID     INT  NOT NULL
 );
 
--- Business: Table where you can see and save the business of SoA (Finished)
+-- Business: (Finished)
 CREATE TABLE Business (
     BusinessID    INT GENERATED ALWAYS AS IDENTITY,
-    HeadquarterID VARCHAR (5)  NOT NULL,
+    HeadquarterID INT          NOT NULL,
     BusinessType  VARCHAR (20) NOT NULL,
     Date          DATE         NOT NULL,
     Deposit       NUMERIC      NOT NULL,
@@ -51,8 +51,8 @@ CREATE TABLE Business (
 
 -- Workers: Multivalued atribute from business (Finished)
 CREATE TABLE Workers (
-    BusinessID VARCHAR (5) NOT NULL,
-    EmployerID VARCHAR (5) NOT NULL
+    BusinessID INT NOT NULL,
+    EmployerID INT NOT NULL
 );
 
 -- CriminalRecord: (Finished)
@@ -74,7 +74,7 @@ CREATE TABLE Guns (
     MemberID INT          NOT NULL
 );
 
--- Address: Addresses from the headquarters and houses of SoA (Finished)
+-- Address: (Finished)
 CREATE TABLE Address (
     AddressID  INT GENERATED ALWAYS AS IDENTITY,
     Type       VARCHAR (20) NOT NULL,
