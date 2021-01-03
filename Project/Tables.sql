@@ -35,7 +35,6 @@ CREATE TABLE Bikes (
 CREATE TABLE Headquarters (
     HeadquarterID INT  GENERATED ALWAYS AS IDENTITY,
     Foundation    DATE NOT NULL,
-    PresidentID   INT  NOT NULL,
     AddressID     INT  NOT NULL
 );
 
@@ -81,7 +80,7 @@ CREATE TABLE Address (
     Street     VARCHAR (20) NOT NULL,
     Number     INT          NOT NULL,
     City       VARCHAR (20) NOT NULL,
-    PostalCode VARCHAR (10) NOT NULL,
+    State      VARCHAR (20) NOT NULL,
     Country    VARCHAR (20) NOT NULL
 );
 
@@ -114,8 +113,7 @@ ALTER TABLE Patches        ADD CONSTRAINT PatchesFK01        FOREIGN KEY (Member
 
 ALTER TABLE Bikes          ADD CONSTRAINT BikesFK01          FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
 
-ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersFK01   FOREIGN KEY (AddressID)     REFERENCES Address      (AddressID),
-                           ADD CONSTRAINT HeadquartersFK02   FOREIGN KEY (PresidentID)   REFERENCES Members      (MemberID);
+ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersFK01   FOREIGN KEY (AddressID)     REFERENCES Address      (AddressID);
 
 ALTER TABLE Business       ADD CONSTRAINT BusinessFK01       FOREIGN KEY (HeadquarterID) REFERENCES Headquarters (HeadquarterID);
 
