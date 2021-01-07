@@ -3,17 +3,17 @@
 
 -- Members: (Finished)
 CREATE TABLE Members (
-    MemberID      INT GENERATED ALWAYS AS IDENTITY,
-    FirstName     VARCHAR (20) NOT NULL,
-    LastName      VARCHAR (20) NOT NULL,
-    Nickname      VARCHAR (20) NOT NULL,
-    Sex           CHAR    (1)  NOT NULL,
-    Birthday      DATE         NOT NULL,
-    Age           INT          NOT NULL,
-    Work          VARCHAR (20) NOT NULL,
-    AddressID     INT          NOT NULL,
-    InBand        BOOLEAN      NOT NULL,
-    HeadquarterID INT
+    MemberID   INT GENERATED ALWAYS AS IDENTITY,
+    FirstName  VARCHAR (20) NOT NULL,
+    LastName   VARCHAR (20) NOT NULL,
+    Nickname   VARCHAR (20) NOT NULL,
+    Sex        CHAR    (1)  NOT NULL,
+    Birthday   DATE         NOT NULL,
+    Age        INT          NOT NULL,
+    Work       VARCHAR (20) NOT NULL,
+    AddressID  INT          NOT NULL,
+    InBand     BOOLEAN      NOT NULL,
+    ChartersID INT
 );
 
 -- Patches: Multivalued atribute from Members (Finished)
@@ -32,20 +32,21 @@ CREATE TABLE Bikes (
 );
 
 -- Headquarters: (Finished)
-CREATE TABLE Headquarters (
-    HeadquarterID INT  GENERATED ALWAYS AS IDENTITY,
-    Foundation    DATE NOT NULL,
-    AddressID     INT  NOT NULL
+CREATE TABLE Charters (
+    ChartersID  INT GENERATED ALWAYS AS IDENTITY,
+    CharterName VARCHAR (20) NOT NULL,
+    Foundation  DATE NOT NULL,
+    AddressID   INT  NOT NULL
 );
 
 -- Business: (Finished)
 CREATE TABLE Business (
-    BusinessID    INT GENERATED ALWAYS AS IDENTITY,
-    HeadquarterID INT          NOT NULL,
-    BusinessType  VARCHAR (20) NOT NULL,
-    Date          DATE         NOT NULL,
-    Deposit       NUMERIC      NOT NULL,
-    Client        VARCHAR (20) NOT NULL
+    BusinessID   INT GENERATED ALWAYS AS IDENTITY,
+    ChartersID   INT          NOT NULL,
+    BusinessType VARCHAR (20) NOT NULL,
+    Date         DATE         NOT NULL,
+    Deposit      NUMERIC      NOT NULL,
+    Client       VARCHAR (20) NOT NULL
 );
 
 -- Workers: Multivalued atribute from business (Finished)
@@ -92,7 +93,7 @@ ALTER TABLE Patches        ADD CONSTRAINT PatchesPK        PRIMARY KEY (Patch, M
 
 ALTER TABLE Bikes          ADD CONSTRAINT BikesPK          PRIMARY KEY (LicensePlate);
 
-ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersPK   PRIMARY KEY (HeadquarterID);
+ALTER TABLE Charters       ADD CONSTRAINT ChartersPK       PRIMARY KEY (ChartersID);
 
 ALTER TABLE Business       ADD CONSTRAINT BusinessPK       PRIMARY KEY (BusinessID);
 
@@ -106,20 +107,20 @@ ALTER TABLE Address        ADD CONSTRAINT AddressPK        PRIMARY KEY (AddressI
 
 -- FOREING KEYS
 
-ALTER TABLE Members        ADD CONSTRAINT MembersFK01        FOREIGN KEY (AddressID)     REFERENCES Address      (AddressID),
-                           ADD CONSTRAINT MembersFK02        FOREIGN KEY (HeadquarterID) REFERENCES Headquarters (HeadquarterID);
+ALTER TABLE Members        ADD CONSTRAINT MembersFK01        FOREIGN KEY (AddressID)  REFERENCES Address  (AddressID),
+                           ADD CONSTRAINT MembersFK02        FOREIGN KEY (ChartersID) REFERENCES Charters (ChartersID);
 
-ALTER TABLE Patches        ADD CONSTRAINT PatchesFK01        FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
+ALTER TABLE Patches        ADD CONSTRAINT PatchesFK01        FOREIGN KEY (MemberID)   REFERENCES Members  (MemberID);
 
-ALTER TABLE Bikes          ADD CONSTRAINT BikesFK01          FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
+ALTER TABLE Bikes          ADD CONSTRAINT BikesFK01          FOREIGN KEY (MemberID)   REFERENCES Members  (MemberID);
 
-ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersFK01   FOREIGN KEY (AddressID)     REFERENCES Address      (AddressID);
+ALTER TABLE Charters       ADD CONSTRAINT ChartersFK01       FOREIGN KEY (AddressID)  REFERENCES Address  (AddressID);
 
-ALTER TABLE Business       ADD CONSTRAINT BusinessFK01       FOREIGN KEY (HeadquarterID) REFERENCES Headquarters (HeadquarterID);
+ALTER TABLE Business       ADD CONSTRAINT BusinessFK01       FOREIGN KEY (ChartersID) REFERENCES Charters (ChartersID);
 
-ALTER TABLE Workers        ADD CONSTRAINT WorkersFK01        FOREIGN KEY (BusinessID)    REFERENCES Business     (BusinessID),
-                           ADD CONSTRAINT WorkersFK02        FOREIGN KEY (EmployerID)    REFERENCES Members      (MemberID);
+ALTER TABLE Workers        ADD CONSTRAINT WorkersFK01        FOREIGN KEY (BusinessID) REFERENCES Business (BusinessID),
+                           ADD CONSTRAINT WorkersFK02        FOREIGN KEY (EmployerID) REFERENCES Members  (MemberID);
 
-ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordFK01 FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
+ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordFK01 FOREIGN KEY (MemberID)   REFERENCES Members  (MemberID);
 
-ALTER TABLE Guns           ADD CONSTRAINT GunsFK01           FOREIGN KEY (MemberID)      REFERENCES Members      (MemberID);
+ALTER TABLE Guns           ADD CONSTRAINT GunsFK01           FOREIGN KEY (MemberID)   REFERENCES Members  (MemberID);
