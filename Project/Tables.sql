@@ -9,7 +9,6 @@ CREATE TABLE Members (
     Nickname   VARCHAR (20) NOT NULL,
     Sex        CHAR    (1)  NOT NULL,
     Birthday   DATE         NOT NULL,
-    Age        INT          NOT NULL,
     Work       VARCHAR (20) NOT NULL,
     AddressID  INT          NOT NULL,
     InBand     BOOLEAN      NOT NULL,
@@ -35,8 +34,8 @@ CREATE TABLE Bikes (
 CREATE TABLE Charters (
     ChartersID  INT GENERATED ALWAYS AS IDENTITY,
     CharterName VARCHAR (20) NOT NULL,
-    Foundation  DATE NOT NULL,
-    AddressID   INT  NOT NULL
+    Foundation  INT          NOT NULL,
+    AddressID   INT          NOT NULL
 );
 
 -- Business: (Finished)
