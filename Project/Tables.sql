@@ -31,13 +31,14 @@ CREATE TABLE Bikes (
 
 -- Headquarters: (Finished)
 CREATE TABLE Headquarters (
-    HeadquarterID  INT GENERATED ALWAYS AS IDENTITY,
-    HeadquarterName     VARCHAR (20) NOT NULL,
+    HeadquarterID   INT GENERATED ALWAYS AS IDENTITY,
+    HeadquarterName VARCHAR (30) NOT NULL,
+    Balance         FLOAT        DEFAULT 0,
     Foundation      INT          NOT NULL,
     AddressID       INT          NOT NULL
 );
 
--- Business: (Finished)
+-- Business: TODO: Change to moves
 CREATE TABLE Business (
     BusinessID      INT GENERATED ALWAYS AS IDENTITY,
     HeadquarterID   INT          NOT NULL,
@@ -48,10 +49,10 @@ CREATE TABLE Business (
 );
 
 -- Workers: Multivalued atribute from business (Finished)
-CREATE TABLE Workers (
+/*CREATE TABLE Workers (
     BusinessID INT NOT NULL,
     EmployerID INT NOT NULL
-);
+);*/
 
 -- CriminalRecord: (Finished)
 CREATE TABLE CriminalRecord (
