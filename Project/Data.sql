@@ -281,30 +281,20 @@ VALUES ('Winnipeg Charter', '1990', 46);
 
 -- Members
 
-INSERT INTO members (firstname, lastname, nickname, sex, birthday, addressid, inband, headquarterid)
-VALUES ('Jackson Nathaniel', 'Teller', 'Jax', 'M', '1978-05-19', 48, true, 1);
+INSERT INTO Address (type, street, number, city, state, country)
+VALUES ('House', 'Forks Market Rd', 1, 'Winnipeg', 'Manitoba', 'Canada');
 
--- Bikes
+INSERT INTO members (firstname, lastname, nickname, sex, birthday, addressid, inband, headquarterid)
+VALUES ('Jackson Nathaniel', 'Teller', 'Jax', 'M', '1978-05-19', 47, true, 1);
 
 INSERT INTO bikes (licenseplate, brand, model, motor, memberid)
-VALUES ();
-
--- Business
-
-INSERT INTO business (headquarterid, businesstype, date, deposit, client)
-VALUES ();
-
--- Workers
-
-INSERT INTO workers (businessid, employerid)
-VALUES ();
-
--- Criminal Record
+VALUES ('7095-ZG', 'Harley-Davidson', 'Dyna Super Glide Sport', 'Four Stroke, 45º V-Twin', 1);
 
 INSERT INTO criminalrecord (memberid, crime, jurydate, jailin, jailout)
-VALUES ();
-
--- Guns
+VALUES (1, 'Murder', '2000-05-15', '2000-05-20', '2002-05-20');
 
 INSERT INTO guns (brand, model, guntype, memberid)
-VALUES ();
+VALUES ('Glock', '17', 'Fire', 1);
+
+INSERT INTO moves (headquarterid, movedesc, date, deposit)
+VALUES (1, 'Weapons sale', '2000-05-26', 5500);

@@ -24,8 +24,8 @@ CREATE TABLE Patches (
 CREATE TABLE Bikes (
     LicensePlate VARCHAR (10) NOT NULL,
     Brand        VARCHAR (20) NOT NULL,
-    Model        VARCHAR (20) NOT NULL,
-    Motor        VARCHAR (20) NOT NULL,
+    Model        VARCHAR (30) NOT NULL,
+    Motor        VARCHAR (30) NOT NULL,
     MemberID     INT          NOT NULL
 );
 
@@ -38,21 +38,14 @@ CREATE TABLE Headquarters (
     AddressID       INT          NOT NULL
 );
 
--- Business: TODO: Change to moves
-CREATE TABLE Business (
-    BusinessID      INT GENERATED ALWAYS AS IDENTITY,
-    HeadquarterID   INT          NOT NULL,
-    BusinessType    VARCHAR (20) NOT NULL,
-    Date            DATE         NOT NULL,
-    Deposit         NUMERIC      NOT NULL,
-    Client          VARCHAR (20) NOT NULL
+-- Business: (Finished)
+CREATE TABLE Moves (
+    MoveID        INT GENERATED ALWAYS AS IDENTITY,
+    HeadquarterID INT          NOT NULL,
+    MoveDesc      TEXT         NOT NULL,
+    Date          DATE         NOT NULL,
+    Deposit       FLOAT        NOT NULL
 );
-
--- Workers: Multivalued atribute from business (Finished)
-/*CREATE TABLE Workers (
-    BusinessID INT NOT NULL,
-    EmployerID INT NOT NULL
-);*/
 
 -- CriminalRecord: (Finished)
 CREATE TABLE CriminalRecord (
@@ -94,9 +87,7 @@ ALTER TABLE Bikes          ADD CONSTRAINT BikesPK          PRIMARY KEY (LicenseP
 
 ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersPK   PRIMARY KEY (HeadquarterID);
 
-ALTER TABLE Business       ADD CONSTRAINT BusinessPK       PRIMARY KEY (BusinessID);
-
---ALTER TABLE Workers        ADD CONSTRAINT WorkersPK        PRIMARY KEY (BusinessID, EmployerID);
+ALTER TABLE Moves          ADD CONSTRAINT MovesPK          PRIMARY KEY (MoveID);
 
 ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordPK PRIMARY KEY (CrimeID);
 
@@ -115,10 +106,7 @@ ALTER TABLE Bikes          ADD CONSTRAINT BikesFK01          FOREIGN KEY (Member
 
 ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersFK01   FOREIGN KEY (AddressID)     REFERENCES Address  (AddressID);
 
-ALTER TABLE Business       ADD CONSTRAINT BusinessFK01       FOREIGN KEY (HeadquarterID) REFERENCES Headquarters (HeadquarterID);
-
---ALTER TABLE Workers        ADD CONSTRAINT WorkersFK01        FOREIGN KEY (BusinessID)    REFERENCES Business (BusinessID),
---                           ADD CONSTRAINT WorkersFK02        FOREIGN KEY (EmployerID)    REFERENCES Members  (MemberID);
+ALTER TABLE Moves          ADD CONSTRAINT MovesFK01          FOREIGN KEY (HeadquarterID) REFERENCES Headquarters (HeadquarterID);
 
 ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordFK01 FOREIGN KEY (MemberID)      REFERENCES Members  (MemberID);
 
