@@ -96,7 +96,7 @@ ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersPK   PRIMARY KEY (Headquar
 
 ALTER TABLE Business       ADD CONSTRAINT BusinessPK       PRIMARY KEY (BusinessID);
 
-ALTER TABLE Workers        ADD CONSTRAINT WorkersPK        PRIMARY KEY (BusinessID, EmployerID);
+--ALTER TABLE Workers        ADD CONSTRAINT WorkersPK        PRIMARY KEY (BusinessID, EmployerID);
 
 ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordPK PRIMARY KEY (CrimeID);
 
@@ -117,8 +117,8 @@ ALTER TABLE Headquarters   ADD CONSTRAINT HeadquartersFK01   FOREIGN KEY (Addres
 
 ALTER TABLE Business       ADD CONSTRAINT BusinessFK01       FOREIGN KEY (HeadquarterID) REFERENCES Headquarters (HeadquarterID);
 
-ALTER TABLE Workers        ADD CONSTRAINT WorkersFK01        FOREIGN KEY (BusinessID)    REFERENCES Business (BusinessID),
-                           ADD CONSTRAINT WorkersFK02        FOREIGN KEY (EmployerID)    REFERENCES Members  (MemberID);
+--ALTER TABLE Workers        ADD CONSTRAINT WorkersFK01        FOREIGN KEY (BusinessID)    REFERENCES Business (BusinessID),
+--                           ADD CONSTRAINT WorkersFK02        FOREIGN KEY (EmployerID)    REFERENCES Members  (MemberID);
 
 ALTER TABLE CriminalRecord ADD CONSTRAINT CriminalRecordFK01 FOREIGN KEY (MemberID)      REFERENCES Members  (MemberID);
 
