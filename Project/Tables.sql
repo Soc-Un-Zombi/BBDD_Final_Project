@@ -33,7 +33,6 @@ CREATE TABLE Bikes (
 CREATE TABLE Headquarters (
     HeadquarterID   INT GENERATED ALWAYS AS IDENTITY,
     HeadquarterName VARCHAR (30) NOT NULL,
-    Balance         FLOAT        DEFAULT 0,
     Foundation      INT          NOT NULL,
     AddressID       INT          NOT NULL
 );
