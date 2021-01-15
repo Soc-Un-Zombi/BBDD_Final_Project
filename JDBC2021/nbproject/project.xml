@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
-            <name>JDBC1718</name>
+            <name>Base_de_dades</name>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

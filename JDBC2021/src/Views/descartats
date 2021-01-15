@@ -1,0 +1,6 @@
+CREATE VIEW info_seu AS SELECT h.headquarterid, h.headquartername, a.street, a.number, a.city, a.state, a.country, 
+h.foundation, COUNT(m.memberid), SUM(d.deposit), COUNT(d.deposit) FROM headquarters h, address a, members m, moves d 
+WHERE m.headquarterid = h.headquarterid AND h.addressid = a.addressid AND h.headquarterid = d.headquarterid;
+
+
+SELECT * FROM elimina_arma WHERE brand LIKE '%%' AND model LIKE '%%';
