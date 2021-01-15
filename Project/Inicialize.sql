@@ -1,4 +1,4 @@
 
-CREATE DATABASE SonsOfAnarchy;
+CREATE DATABASE soa;
 
-\connect SonsOfAnarchy;
+\connect soa;
